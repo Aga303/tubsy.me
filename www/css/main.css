@@ -1,0 +1,19 @@
+.red {
+    background-color: #F00;
+}
+
+.cyan {
+    background-color: #0FF;
+}
+
+.pattern_row {
+    width: 100%;
+}
+
+.pattern_row td {
+    height: 50px
+}
+
+.hidden {
+    display: none;
+}
