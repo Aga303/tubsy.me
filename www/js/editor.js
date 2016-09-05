@@ -10,6 +10,7 @@ var Editor = (function() {
 
 	Editor.prototype.addPattern = function(steps) {
 		var pattern = $('<div></div>');
+    pattern.addClass('pattern_container');
 		this.editorContainer.append(pattern);
 
 		var editorRows = $('<div></div>');
@@ -19,21 +20,26 @@ var Editor = (function() {
 		pattern.append(editorRows);
 		editorRows.find($("td")).click(function() {
 			$(this).toggleClass("red");
-			$(this).toggleClass("cyan");
 		});
 
 		var patternDisplay = this.createTable(16);
+    patternDisplay.addClass('cyan');
 		pattern.prepend(patternDisplay);
 		patternDisplay.click(function() {
 			editorRows.toggleClass("hidden");
 		});
+
+    var patternName = $('<p></p>');
+    patternName.html('Djembe');
+    pattern.prepend(patternName);
+
 	}
 
 	Editor.prototype.createTable = function(cells) {
         var table = $('<table class="pattern_row"></table>');
 		var tr = $("<tr></tr>");
 		for (var i = 0; i < cells; i++) {
-			tr.append('<td class="cyan"></td>');
+			tr.append('<td></td>');
 		}
 		table.append(tr);
 		return table;
