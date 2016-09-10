@@ -9,6 +9,7 @@ var Editor = (function() {
     }
 
     Editor.prototype.addPattern = function(steps) {
+        var _this = this;
         var pattern = $('<div></div>');
         pattern.addClass('pattern_container');
         this.editorContainer.append(pattern);
@@ -19,7 +20,7 @@ var Editor = (function() {
         editorRows.append(this.createTable(steps));
         pattern.append(editorRows);
         editorRows.find($("td")).click(function() {
-            $(this).toggleClass("red");
+          _this.markCell(this);
         });
 
         var patternDisplay = this.createTable(16);
@@ -58,6 +59,17 @@ var Editor = (function() {
         addButton.click(function() {
             _this.addPattern(16);
         });
+    }
+
+    Editor.prototype.markCell = function(cell) {
+        var index = $(cell).parent().find('td').index($(cell));
+        var selectedRow = $(cell).parents('.pattern_row');
+        var rows = selectedRow.siblings();
+
+        for (var i = 0; i < rows.length; i++)
+          $(rows[i]).find('td:nth-child('+ (index+1) +')').removeClass('selected');
+
+        $(cell).toggleClass("selected");
     }
 
     return Editor;
