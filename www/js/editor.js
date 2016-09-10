@@ -24,7 +24,6 @@ var Editor = (function() {
         });
 
         var patternDisplay = this.createTable(16);
-        patternDisplay.addClass('cyan');
         pattern.prepend(patternDisplay);
         patternDisplay.click(function() {
             editorRows.toggleClass("hidden");
@@ -62,14 +61,21 @@ var Editor = (function() {
     }
 
     Editor.prototype.markCell = function(cell) {
-        var index = $(cell).parent().find('td').index($(cell));
+        var index = $(cell).index();
         var selectedRow = $(cell).parents('.pattern_row');
         var rows = selectedRow.siblings();
+        var titleRow = $(cell).parents('.pattern_container').find('.pattern_row');
+        var titleRowCell = $(titleRow[0]).find('td:nth-child('+ (index+1) +')');
 
         for (var i = 0; i < rows.length; i++)
           $(rows[i]).find('td:nth-child('+ (index+1) +')').removeClass('selected');
 
+        for (var i = 1; i < 4; i++)
+          titleRowCell.removeClass('selected-'+i);
+
         $(cell).toggleClass("selected");
+        if ($(cell).hasClass('selected'))
+          titleRowCell.addClass('selected-'+(selectedRow.index()+1));
     }
 
     return Editor;
