@@ -27,17 +27,23 @@
 
 .pattern_row:nth-child(1) .selected, .selected-1{
     background-image: url('../img/triangle.svg');
-    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 
 .pattern_row:nth-child(2) .selected, .selected-2{
     background-image: url('../img/box.svg');
-    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 
 .pattern_row:nth-child(3) .selected, .selected-3{
     background-image: url('../img/ball.svg');
-    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 
 .pattern_container > table tr {
