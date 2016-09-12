@@ -24,6 +24,7 @@ var Editor = (function() {
         });
 
         var patternDisplay = this.createTable(16);
+        patternDisplay.addClass('pattern_display');
         pattern.prepend(patternDisplay);
         patternDisplay.click(function() {
             editorRows.toggleClass("hidden");

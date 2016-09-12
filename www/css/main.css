@@ -25,6 +25,13 @@
     border-bottom:1px solid #333;
 }
 
+tr.pattern_display + tr.pattern_row {
+}
+
+.pattern_row:nth-child(1) {
+    border-top: 1px solid #333;
+}
+
 .pattern_row:nth-child(1) .selected, .selected-1{
     background-image: url('../img/triangle.svg');
     background-repeat: no-repeat;
@@ -48,6 +55,10 @@
 
 .pattern_container > table tr {
     border-top:1px solid #333;
+}
+
+.pattern_display {
+    margin-bottom: 10px
 }
 
 .hidden {
