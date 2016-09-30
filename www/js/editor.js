@@ -30,15 +30,15 @@ var Editor = (function() {
             editorRows.toggleClass("hidden");
         });
 
-    var patternName = $('<div></div>');
-    patternName.addClass('mdl-textfield mdl-js-textfield');
-    var patternInput = $('<input></input>');
-    patternInput.addClass('mdl-textfield__input');
-    patternInput.attr('type','text');
-    patternInput.attr('id','fname');
-    patternInput.attr('value','Djembe');
-    patternName.append(patternInput);
-    pattern.prepend(patternName);
+        var patternName = $('<div></div>');
+        patternName.addClass('mdl-textfield mdl-js-textfield');
+        var patternInput = $('<input></input>');
+        patternInput.addClass('mdl-textfield__input');
+        patternInput.attr('type','text');
+        patternInput.attr('id','fname');
+        patternInput.attr('value','Djembe');
+        patternName.append(patternInput);
+        pattern.prepend(patternName);
 
     }
 
