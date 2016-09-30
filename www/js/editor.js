@@ -4,11 +4,11 @@ var Editor = (function() {
         this.editorContainer = $("#editor_container");
         this.addButtonContainer = $("#add_button_container");
 
-        this.addPattern(16);
-        this.createAddButton();
+        this.addDjembePattern(16);
+        this.createAddButtons();
     }
 
-    Editor.prototype.addPattern = function(steps) {
+    Editor.prototype.addDjembePattern = function(steps) {
         var _this = this;
         var pattern = $('<div></div>');
         pattern.addClass('pattern_container');
@@ -42,6 +42,37 @@ var Editor = (function() {
 
     }
 
+    Editor.prototype.addDundunPattern = function(drumType, steps) {
+        var _this = this;
+        var pattern = $('<div></div>');
+        pattern.addClass('pattern_container');
+        this.editorContainer.append(pattern);
+
+        var bellRow = $('<div></div>');
+        bellRow.append(this.createTable(steps));
+        bellRow.addClass('bell_row');
+        pattern.append(bellRow);
+        bellRow.find($("td")).click(function() {
+          $(this).toggleClass("selected");
+        });
+
+        var drumRow = $('<div></div>');
+        drumRow.append(this.createTable(steps));
+        pattern.append(drumRow);
+        drumRow.find($("td")).click(function() {
+          $(this).toggleClass("selected");
+        });
+
+        var patternName = $('<div></div>');
+        patternName.addClass('mdl-textfield mdl-js-textfield');
+        var patternInput = $('<input></input>');
+        patternInput.addClass('mdl-textfield__input');
+        patternInput.attr('type','text');
+        patternInput.attr('value', drumType);
+        patternName.append(patternInput);
+        pattern.prepend(patternName);
+    }
+
     Editor.prototype.createTable = function(cells) {
         var table = $('<table class="pattern_row"></table>');
         var tr = $("<tr></tr>");
@@ -52,12 +83,27 @@ var Editor = (function() {
         return table;
     }
 
-    Editor.prototype.createAddButton = function() {
+    Editor.prototype.createAddButtons = function() {
         _this = this;
-        var addButton = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">add pattern</button>');
-        this.addButtonContainer.append(addButton);
-        addButton.click(function() {
-            _this.addPattern(16);
+        var addDjembeButton = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><i class="material-icons">add</i>djembe</button>');
+        var addDundunbaButton = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><i class="material-icons">add</i>dundunba</button>');
+        var addSangbanButton = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><i class="material-icons">add</i>sangban</button>');
+        var addKenkeniButton = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><i class="material-icons">add</i>kenkeni</button>');
+        this.addButtonContainer.append(addDjembeButton);
+        this.addButtonContainer.append(addDundunbaButton);
+        this.addButtonContainer.append(addSangbanButton);
+        this.addButtonContainer.append(addKenkeniButton);
+        addDjembeButton.click(function() {
+            _this.addDjembePattern(16);
+        });
+        addDundunbaButton.click(function() {
+            _this.addDundunPattern("Dundunba", 16);
+        });
+        addSangbanButton.click(function() {
+            _this.addDundunPattern("Sangban", 16);
+        });
+        addKenkeniButton.click(function() {
+            _this.addDundunPattern("Kenkeni", 16);
         });
     }
 

@@ -1,3 +1,11 @@
+#add_button_container button {
+    margin-right:2.5vw;
+}
+
+.bell_row {
+    margin-bottom:10px;
+}
+
 .pattern_container {
     margin-bottom:20px;
 }
