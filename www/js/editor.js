@@ -30,6 +30,13 @@ var Editor = (function() {
             editorRows.toggleClass("hidden");
         });
 
+        var closeButton = $('<button><i class="material-icons">close</i></button>');
+        closeButton.addClass('close-btn mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab');
+        pattern.prepend(closeButton);
+        closeButton.click(function() {
+            _this.showRemovePatternDialog(this);
+        });
+
         var patternName = $('<div></div>');
         patternName.addClass('mdl-textfield mdl-js-textfield');
         var patternInput = $('<input></input>');
@@ -63,6 +70,13 @@ var Editor = (function() {
           $(this).toggleClass("selected");
         });
 
+        var closeButton = $('<button><i class="material-icons">close</i></button>');
+        closeButton.addClass('close-btn mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab');
+        pattern.prepend(closeButton);
+        closeButton.click(function() {
+            _this.showRemovePatternDialog(this);
+        });
+
         var patternName = $('<div></div>');
         patternName.addClass('mdl-textfield mdl-js-textfield');
         var patternInput = $('<input></input>');
@@ -71,6 +85,26 @@ var Editor = (function() {
         patternInput.attr('value', drumType);
         patternName.append(patternInput);
         pattern.prepend(patternName);
+    }
+
+    Editor.prototype.removePattern = function(closeButton) {
+      $(closeButton).parents(".pattern_container").remove();
+    }
+
+    Editor.prototype.showRemovePatternDialog = function(closeButton) {
+      var _this = this;
+      showDialog({
+          title: 'Remove pattern?',
+          positive: {
+              title: 'Yes, remove!',
+              onClick: function (e) {
+                  _this.removePattern(closeButton);
+              }
+          },
+          negative: {
+              title: 'No'
+          }
+      });
     }
 
     Editor.prototype.createTable = function(cells) {

@@ -6,6 +6,10 @@
     margin-bottom:10px;
 }
 
+.close-btn {
+  float:right;
+}
+
 .pattern_container {
     margin-bottom:20px;
 }
