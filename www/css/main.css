@@ -16,6 +16,10 @@
   animation-duration: 0.3s;
 }
 
+.editor_rows td, .bell_row td, .drum_row td {
+    cursor:crosshair;
+}
+
 .pattern_container {
     margin-bottom:20px;
 }
@@ -77,6 +81,9 @@ tr.pattern_display + tr.pattern_row {
 
 .pattern_display {
     margin-bottom: 10px
+}
+.pattern_display td {
+    cursor:ns-resize;
 }
 
 .hidden {

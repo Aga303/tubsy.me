@@ -65,6 +65,7 @@ var Editor = (function() {
         });
 
         var drumRow = $('<div></div>');
+        drumRow.addClass("drum_row");
         drumRow.append(this.createTable(steps));
         pattern.append(drumRow);
         drumRow.find($("td")).click(function() {
