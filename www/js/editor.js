@@ -2,6 +2,7 @@ var Editor = (function() {
 
     function Editor() {
         this.editorContainer = $("#editor_container");
+        this.timeSignatureSelectContainer = $("#timesignature_select_container");
         this.addButtonContainer = $("#add_button_container");
 
         this.addDjembePattern(16);
@@ -24,7 +25,7 @@ var Editor = (function() {
           _this.markCell(this);
         });
 
-        var patternDisplay = this.createTable(16);
+        var patternDisplay = this.createTable(steps);
         patternDisplay.addClass('pattern_display');
         pattern.prepend(patternDisplay);
         patternDisplay.click(function() {
@@ -140,7 +141,7 @@ var Editor = (function() {
         this.addButtonContainer.append(addSangbanButton);
         this.addButtonContainer.append(addKenkeniButton);
         addDjembeButton.click(function() {
-            _this.addDjembePattern(16);
+            _this.createDjembePattern();
         });
         addDundunbaButton.click(function() {
             _this.addDundunPattern("Dundunba", 16);
@@ -150,6 +151,24 @@ var Editor = (function() {
         });
         addKenkeniButton.click(function() {
             _this.addDundunPattern("Kenkeni", 16);
+        });
+    }
+
+    Editor.prototype.createDjembePattern = function() {
+        _this = this;
+        var timeSignatureSelectButtons = $('<div id=timesignature_selector></div>');
+        this.timeSignatureSelectContainer.append(timeSignatureSelectButtons);
+        var select44Button = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">4/4</button>');
+        var select68Button = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">6/8</button>');
+        timeSignatureSelectButtons.append(select44Button);
+        timeSignatureSelectButtons.append(select68Button);
+        select44Button.click(function() {
+            document.getElementById("timesignature_selector").remove();
+            _this.addDjembePattern(16);
+        });
+        select68Button.click(function() {
+            document.getElementById("timesignature_selector").remove();
+            _this.addDjembePattern(24);
         });
     }
 
