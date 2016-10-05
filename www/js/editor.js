@@ -47,7 +47,7 @@ var Editor = (function() {
         patternInput.attr('value','Djembe');
         patternName.append(patternInput);
         pattern.prepend(patternName);
-
+        this.scrollToElement(pattern[0]);
     }
 
     Editor.prototype.addDundunPattern = function(drumType, steps) {
@@ -95,6 +95,7 @@ var Editor = (function() {
         patternInput.attr('value', drumType);
         patternName.append(patternInput);
         pattern.prepend(patternName);
+        this.scrollToElement(pattern[0]);
     }
 
     Editor.prototype.removePattern = function(closeButton) {
@@ -167,6 +168,10 @@ var Editor = (function() {
         $(cell).toggleClass("selected");
         if ($(cell).hasClass('selected'))
           titleRowCell.addClass('selected-'+(selectedRow.index()+1));
+    }
+
+    Editor.prototype.scrollToElement = function(element) {
+        element.scrollIntoView({ behavior: "smooth",block: "start"});
     }
 
     return Editor;
