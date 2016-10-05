@@ -11,10 +11,11 @@ var Editor = (function() {
     Editor.prototype.addDjembePattern = function(steps) {
         var _this = this;
         var pattern = $('<div></div>');
-        pattern.addClass('pattern_container');
+        pattern.addClass('pattern_container animated fadeIn');
         this.editorContainer.append(pattern);
 
         var editorRows = $('<div></div>');
+        editorRows.addClass("editor_rows animated fadeIn");
         editorRows.append(this.createTable(steps));
         editorRows.append(this.createTable(steps));
         editorRows.append(this.createTable(steps));
@@ -27,7 +28,7 @@ var Editor = (function() {
         patternDisplay.addClass('pattern_display');
         pattern.prepend(patternDisplay);
         patternDisplay.click(function() {
-            editorRows.toggleClass("hidden");
+          editorRows.toggleClass("fadeIn hidden");
         });
 
         var closeButton = $('<button><i class="material-icons">close</i></button>');

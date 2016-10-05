@@ -10,6 +10,12 @@
   float:right;
 }
 
+.editor_rows {
+  -webkit-animation-duration: 0.3s;
+  -moz-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+}
+
 .pattern_container {
     margin-bottom:20px;
 }
