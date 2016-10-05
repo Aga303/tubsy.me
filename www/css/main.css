@@ -27,10 +27,11 @@
 .pattern_container .mdl-textfield {
     padding:0px;
     margin:0px;
+    max-width:80%;
 }
 
 .pattern_container .mdl-textfield input{
-    font-size: 2em;
+    font-size: 3vw;
 }
 
 .pattern_row {
