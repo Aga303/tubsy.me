@@ -45,14 +45,14 @@ tr.pattern_display + tr.pattern_row {
 }
 
 .pattern_row:nth-child(1) .selected, .selected-1{
-    background-image: url('../img/triangle.svg');
+    background-image: url('../img/x.svg');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
 }
 
 .pattern_row:nth-child(2) .selected, .selected-2{
-    background-image: url('../img/box.svg');
+    background-image: url('../img/triangle.svg');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;

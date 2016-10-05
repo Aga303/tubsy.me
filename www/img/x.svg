@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="triangle.svg">
+   sodipodi:docname="x.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="4.7641319"
-     inkscape:cx="39.396549"
-     inkscape:cy="34.441148"
+     inkscape:zoom="5.6"
+     inkscape:cx="49.016827"
+     inkscape:cy="37.68802"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -52,22 +52,17 @@
      inkscape:label="Taso 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <path
-       sodipodi:type="star"
-       style="fill:#FFA513"
-       id="path3404"
-       sodipodi:sides="3"
-       sodipodi:cx="50.680105"
-       sodipodi:cy="61.474747"
-       sodipodi:r1="49.615871"
-       sodipodi:r2="24.807936"
-       sodipodi:arg1="0.52807445"
-       sodipodi:arg2="1.575272"
-       inkscape:flatsided="true"
-       inkscape:rounded="0"
-       inkscape:randomized="0"
-       d="M 93.537246,86.474747 7.6008967,86.090121 50.902167,11.859372 Z"
-       inkscape:transform-center-x="0.11103183"
-       inkscape:transform-center-y="-12.307687" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:98.19672394px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#FFDF00;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="12.982045"
+       y="90.53524"
+       id="text3445"
+       sodipodi:linespacing="125%"
+       transform="scale(1.0878473,0.91924667)"><tspan
+         sodipodi:role="line"
+         id="tspan3447"
+         x="12.982045"
+         y="90.53524">X</tspan></text>
   </g>
 </svg>
