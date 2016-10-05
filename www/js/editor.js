@@ -68,7 +68,16 @@ var Editor = (function() {
         drumRow.append(this.createTable(steps));
         pattern.append(drumRow);
         drumRow.find($("td")).click(function() {
-          $(this).toggleClass("selected");
+            if ($(this).hasClass("selected-2")) {
+                $(this).removeClass("selected-2");
+                $(this).addClass("selected-3");
+                return;
+            }
+            if ($(this).hasClass("selected-3")) {
+                $(this).removeClass("selected-3");
+                return;
+            }
+            $(this).addClass("selected-2");
         });
 
         var closeButton = $('<button><i class="material-icons">close</i></button>');
