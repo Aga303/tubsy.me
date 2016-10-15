@@ -5,11 +5,11 @@ var Editor = (function() {
         this.timeSignatureSelectContainer = $("#timesignature_select_container");
         this.addButtonContainer = $("#add_button_container");
 
-        this.addDjembePattern(16);
+        this.addDjembePattern(16,4);
         this.createAddButtons();
     }
 
-    Editor.prototype.addDjembePattern = function(steps) {
+    Editor.prototype.addDjembePattern = function(steps, group) {
         var _this = this;
         var pattern = $('<div></div>');
         pattern.addClass('pattern_container animated fadeIn');
@@ -17,15 +17,15 @@ var Editor = (function() {
 
         var editorRows = $('<div></div>');
         editorRows.addClass("editor_rows animated fadeIn");
-        editorRows.append(this.createTable(steps));
-        editorRows.append(this.createTable(steps));
-        editorRows.append(this.createTable(steps));
+        editorRows.append(this.createTable(steps,group));
+        editorRows.append(this.createTable(steps,group));
+        editorRows.append(this.createTable(steps,group));
         pattern.append(editorRows);
         editorRows.find($("td")).click(function() {
           _this.markCell(this);
         });
 
-        var patternDisplay = this.createTable(steps);
+        var patternDisplay = this.createTable(steps,group);
         patternDisplay.addClass('pattern_display');
         pattern.prepend(patternDisplay);
         patternDisplay.click(function() {
@@ -58,7 +58,7 @@ var Editor = (function() {
         this.editorContainer.append(pattern);
 
         var bellRow = $('<div></div>');
-        bellRow.append(this.createTable(steps));
+        bellRow.append(this.createTable(steps,4));
         bellRow.addClass('bell_row');
         pattern.append(bellRow);
         bellRow.find($("td")).click(function() {
@@ -67,7 +67,7 @@ var Editor = (function() {
 
         var drumRow = $('<div></div>');
         drumRow.addClass("drum_row");
-        drumRow.append(this.createTable(steps));
+        drumRow.append(this.createTable(steps,4));
         pattern.append(drumRow);
         drumRow.find($("td")).click(function() {
             if ($(this).hasClass("selected-2")) {
@@ -120,11 +120,17 @@ var Editor = (function() {
       });
     }
 
-    Editor.prototype.createTable = function(cells) {
+    Editor.prototype.createTable = function(cells,group) {
         var table = $('<table class="pattern_row"></table>');
         var tr = $("<tr></tr>");
+        var addBg = false;
         for (var i = 0; i < cells; i++) {
-            tr.append('<td></td>');
+            if (i % group == 0)
+                addBg = !addBg;
+            if (addBg)
+                tr.append('<td class="gray-background"></td>');
+            else
+                tr.append('<td></td>');
         }
         table.append(tr);
         return table;
@@ -164,11 +170,11 @@ var Editor = (function() {
         timeSignatureSelectButtons.append(select68Button);
         select44Button.click(function() {
             document.getElementById("timesignature_selector").remove();
-            _this.addDjembePattern(16);
+            _this.addDjembePattern(16,4);
         });
         select68Button.click(function() {
             document.getElementById("timesignature_selector").remove();
-            _this.addDjembePattern(24);
+            _this.addDjembePattern(24,6);
         });
     }
 

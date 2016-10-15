@@ -53,6 +53,10 @@
     border-right:1px solid #999;
 }
 
+.pattern_row td.gray-background {
+    background-color: #eee;
+}
+
 .pattern_row tr{
     border-bottom:1px solid #999;
 }
