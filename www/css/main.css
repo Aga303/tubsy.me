@@ -1,5 +1,10 @@
+#add_button_container {
+  margin-top:0px;
+}
+
 #add_button_container button {
     margin-right:2.5vw;
+    margin-top: 10px;
 }
 
 #timesignature_select_container button {
