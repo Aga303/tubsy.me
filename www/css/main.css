@@ -19,6 +19,16 @@
   float:right;
 }
 
+.mdl-button--fab.mdl-button--mini-fab.close-btn {
+    max-height:40px;
+    height:5vw;
+    min-height:25px;
+
+    max-width:40px;
+    width:5vw;
+    min-width:25px;
+}
+
 .editor_rows {
   -webkit-animation-duration: 0.3s;
   -moz-animation-duration: 0.3s;
