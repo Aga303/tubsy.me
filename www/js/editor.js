@@ -51,14 +51,14 @@ var Editor = (function() {
         this.scrollToElement(pattern[0]);
     }
 
-    Editor.prototype.addDundunPattern = function(drumType, steps) {
+    Editor.prototype.addDundunPattern = function(drumType, steps, group) {
         var _this = this;
         var pattern = $('<div></div>');
         pattern.addClass('pattern_container');
         this.editorContainer.append(pattern);
 
         var bellRow = $('<div></div>');
-        bellRow.append(this.createTable(steps,4));
+        bellRow.append(this.createTable(steps,group));
         bellRow.addClass('bell_row');
         pattern.append(bellRow);
         bellRow.find($("td")).click(function() {
@@ -67,7 +67,7 @@ var Editor = (function() {
 
         var drumRow = $('<div></div>');
         drumRow.addClass("drum_row");
-        drumRow.append(this.createTable(steps,4));
+        drumRow.append(this.createTable(steps,group));
         pattern.append(drumRow);
         drumRow.find($("td")).click(function() {
             if ($(this).hasClass("selected-2")) {
@@ -150,13 +150,13 @@ var Editor = (function() {
             _this.createDjembePattern();
         });
         addDundunbaButton.click(function() {
-            _this.addDundunPattern("Dundunba", 16);
+            _this.createDundunPattern("Dundunba");
         });
         addSangbanButton.click(function() {
-            _this.addDundunPattern("Sangban", 16);
+            _this.createDundunPattern("Sangban");
         });
         addKenkeniButton.click(function() {
-            _this.addDundunPattern("Kenkeni", 16);
+            _this.createDundunPattern("Kenkeni");
         });
     }
 
@@ -175,6 +175,24 @@ var Editor = (function() {
         select68Button.click(function() {
             document.getElementById("timesignature_selector").remove();
             _this.addDjembePattern(24,6);
+        });
+    }
+
+    Editor.prototype.createDundunPattern = function(drumType) {
+        _this = this;
+        var timeSignatureSelectButtons = $('<div id=timesignature_selector></div>');
+        this.timeSignatureSelectContainer.append(timeSignatureSelectButtons);
+        var select44Button = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">4/4</button>');
+        var select68Button = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">6/8</button>');
+        timeSignatureSelectButtons.append(select44Button);
+        timeSignatureSelectButtons.append(select68Button);
+        select44Button.click(function() {
+            document.getElementById("timesignature_selector").remove();
+            _this.addDundunPattern(drumType,16,4);
+        });
+        select68Button.click(function() {
+            document.getElementById("timesignature_selector").remove();
+            _this.addDundunPattern(drumType,24,6);
         });
     }
 
