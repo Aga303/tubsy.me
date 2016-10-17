@@ -147,20 +147,21 @@ var Editor = (function() {
         this.addButtonContainer.append(addSangbanButton);
         this.addButtonContainer.append(addKenkeniButton);
         addDjembeButton.click(function() {
-            _this.createDjembePattern();
+            _this.createDrumPattern("Djembe");
         });
         addDundunbaButton.click(function() {
-            _this.createDundunPattern("Dundunba");
+            _this.createDrumPattern("Dundunba");
         });
         addSangbanButton.click(function() {
-            _this.createDundunPattern("Sangban");
+            _this.createDrumPattern("Sangban");
         });
         addKenkeniButton.click(function() {
-            _this.createDundunPattern("Kenkeni");
+            _this.createDrumPattern("Kenkeni");
         });
     }
 
-    Editor.prototype.createDjembePattern = function() {
+
+    Editor.prototype.createDrumPattern = function(drumType) {
         _this = this;
         var timeSignatureSelectButtons = $('<div id=timesignature_selector></div>');
         this.timeSignatureSelectContainer.append(timeSignatureSelectButtons);
@@ -170,29 +171,17 @@ var Editor = (function() {
         timeSignatureSelectButtons.append(select68Button);
         select44Button.click(function() {
             document.getElementById("timesignature_selector").remove();
-            _this.addDjembePattern(16,4);
+            if (drumType == "Djembe")
+                _this.addDjembePattern(16,4);
+            else
+                _this.addDundunPattern(drumType,16,4);
         });
         select68Button.click(function() {
             document.getElementById("timesignature_selector").remove();
-            _this.addDjembePattern(24,6);
-        });
-    }
-
-    Editor.prototype.createDundunPattern = function(drumType) {
-        _this = this;
-        var timeSignatureSelectButtons = $('<div id=timesignature_selector></div>');
-        this.timeSignatureSelectContainer.append(timeSignatureSelectButtons);
-        var select44Button = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">4/4</button>');
-        var select68Button = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">6/8</button>');
-        timeSignatureSelectButtons.append(select44Button);
-        timeSignatureSelectButtons.append(select68Button);
-        select44Button.click(function() {
-            document.getElementById("timesignature_selector").remove();
-            _this.addDundunPattern(drumType,16,4);
-        });
-        select68Button.click(function() {
-            document.getElementById("timesignature_selector").remove();
-            _this.addDundunPattern(drumType,24,6);
+            if (drumType == "Djembe")
+                _this.addDjembePattern(24,6);
+            else
+                _this.addDundunPattern(drumType,24,6);
         });
     }
 
