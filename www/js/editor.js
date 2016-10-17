@@ -163,6 +163,9 @@ var Editor = (function() {
 
     Editor.prototype.createDrumPattern = function(drumType) {
         _this = this;
+        var timeSelector = document.getElementById("timesignature_selector");
+        if (timeSelector != null)
+            document.getElementById("timesignature_selector").remove();
         var timeSignatureSelectButtons = $('<div id=timesignature_selector></div>');
         this.timeSignatureSelectContainer.append(timeSignatureSelectButtons);
         var select44Button = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">4/4</button>');
