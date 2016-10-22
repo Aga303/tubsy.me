@@ -51,6 +51,7 @@
 
 .pattern_container .mdl-textfield input{
     font-size: 3vw;
+    border-width: 0;
 }
 
 .pattern_row {
