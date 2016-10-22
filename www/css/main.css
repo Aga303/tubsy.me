@@ -46,7 +46,7 @@
 .pattern_container .mdl-textfield {
     padding:0px;
     margin:0px;
-    max-width:80%;
+    width:80%;
 }
 
 .pattern_container .mdl-textfield input{
