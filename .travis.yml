@@ -1,0 +1,13 @@
+language: generic
+deploy:
+  local_dir: www
+  provider: s3
+  access_key_id: AKIAIRXUGIXGH4J3PU6Q
+  secret_access_key:
+    secure: gyD+m738E7tny51kHpC9oXDqG9lWK4M6Uji1eYHtpNTyEGEUMKZGPvlWM++gZe5Biemm08UiQqNzeDuFj1ND73EirrnZw7Y/W4fkSAoW+0d/r/15Kx3B31eh+lqRbQUK0hkLehN02sX/0C93914ooViLwfw61shtyw1O88dsBgEpwvNYPWEMjHb58mEj5Nvf6rJO0gO+I6FU94O98fNDg+WwZg6ALgBf2IYFY/qSyMjKT8E3Klft4Xpf2dydORViJPL61tI6vgAvf3Em4c+K/0HnW9qeSm4udwlf194vfdQYtOstGS2eykGIxXBmtfcbaxAwTDO9LlEU6fu/ghAWf2k8nNjLGzF/Fu8DNWiNuSOBrBquCiv82eGQ8JMG4+srYp/RxRhq7vjkmKjZtrmjslF9Ya0tP22Z9TAqOMr6KhdutjyFK5w5UBEW/b0d4hKPWEgsTAFcy3aBexxQNbSqbHUebA4K85fzuKE0FrFHdLFJ8g6X8VvFb9LSPgT+sPT3HlWzIblsKBbLyzGWoyTARa6M/LzMrLp/yyoh/Z20zVaFKYvbWwmEQtjThSB8MshMwtULe/ISkFeWaLvs2TkMXbCi4zZ2tG512bsvSi6jvutydaefV848Iqu6JGUEmCmCeFDE6UTCHX0GEe6YpVOjJkAcXvWgmZgEQgirpscqXcQ=
+  bucket: demo.tubsy.me
+  region: eu-central-1
+  acl: public_read
+  skip_cleanup: true
+  on:
+    branch: master
