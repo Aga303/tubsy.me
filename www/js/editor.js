@@ -40,7 +40,7 @@ var Editor = (function() {
         });
 
         var patternName = $('<div></div>');
-        patternName.addClass('mdl-textfield mdl-js-textfield');
+        patternName.addClass('mdl-textfield mdl-js-textfield pattern-title');
         var patternInput = $('<input></input>');
         patternInput.addClass('mdl-textfield__input');
         patternInput.attr('type','text');
@@ -90,7 +90,7 @@ var Editor = (function() {
         });
 
         var patternName = $('<div></div>');
-        patternName.addClass('mdl-textfield mdl-js-textfield');
+        patternName.addClass('mdl-textfield mdl-js-textfield pattern-title');
         var patternInput = $('<input></input>');
         patternInput.addClass('mdl-textfield__input');
         patternInput.attr('type','text');
@@ -106,8 +106,9 @@ var Editor = (function() {
 
     Editor.prototype.showRemovePatternDialog = function(closeButton) {
       var _this = this;
+      var patternName = $(closeButton).siblings(".pattern-title").find("input").val();
       showDialog({
-          title: 'Remove pattern?',
+          title: 'Remove pattern ' + patternName + '?',
           positive: {
               title: 'Yes, remove!',
               onClick: function (e) {
