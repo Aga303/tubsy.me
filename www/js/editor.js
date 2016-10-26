@@ -168,10 +168,19 @@ var Editor = (function() {
             document.getElementById("timesignature_selector").remove();
         var timeSignatureSelectButtons = $('<div id=timesignature_selector></div>');
         this.timeSignatureSelectContainer.append(timeSignatureSelectButtons);
+        var select34Button = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">3/4</button>');
         var select44Button = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">4/4</button>');
         var select68Button = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">6/8</button>');
+        timeSignatureSelectButtons.append(select34Button);
         timeSignatureSelectButtons.append(select44Button);
         timeSignatureSelectButtons.append(select68Button);
+        select34Button.click(function() {
+            document.getElementById("timesignature_selector").remove();
+            if (drumType == "Djembe")
+                _this.addDjembePattern(12,3);
+            else
+                _this.addDundunPattern(drumType,12,3);
+        });
         select44Button.click(function() {
             document.getElementById("timesignature_selector").remove();
             if (drumType == "Djembe")
