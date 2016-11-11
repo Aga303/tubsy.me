@@ -7,12 +7,16 @@ var Editor = (function() {
 
         this.addDjembePattern(16,4);
         this.createAddButtons();
+
     }
 
     Editor.prototype.addDjembePattern = function(steps, group) {
         var _this = this;
         var pattern = $('<div></div>');
         pattern.addClass('pattern_container animated fadeIn');
+        pattern.data("steps",steps);
+        pattern.data("group",group);
+        pattern.data("type","djembe");
         this.editorContainer.append(pattern);
 
         var editorRows = $('<div></div>');
@@ -55,6 +59,9 @@ var Editor = (function() {
         var _this = this;
         var pattern = $('<div></div>');
         pattern.addClass('pattern_container');
+        pattern.data("steps",steps);
+        pattern.data("group",group);
+        pattern.data("type","dundun");
         this.editorContainer.append(pattern);
 
         var bellRow = $('<div></div>');
@@ -62,7 +69,7 @@ var Editor = (function() {
         bellRow.addClass('bell_row');
         pattern.append(bellRow);
         bellRow.find($("td")).click(function() {
-          $(this).toggleClass("selected");
+            $(this).toggleClass("selected");
         });
 
         var drumRow = $('<div></div>');
@@ -218,6 +225,60 @@ var Editor = (function() {
 
     Editor.prototype.scrollToElement = function(element) {
         element.scrollIntoView({ behavior: "smooth",block: "start"});
+    }
+
+    Editor.prototype.exportJSON = function() {
+        var json = {"patterns":[]};
+        var patterns = $("#editor_container").find(".pattern_container");
+        var pattern;
+        var row;
+        patterns.each(function (index, value) {
+            pattern = {};
+
+            pattern.name = $(value).find(".pattern-title > input").val();
+            pattern.group = $(value).data('group');
+            pattern.length = $(value).data('steps');
+            pattern.type = $(value).data('type');
+
+            if (pattern.type == "djembe") {
+
+                pattern.steps = [];
+                row = $(value).find('.pattern_display');
+                $(row).find("td").each(function (index,value) {
+                    if ($(value).hasClass('selected-1'))
+                        pattern.steps.push('a');
+                    else if ($(value).hasClass('selected-2'))
+                        pattern.steps.push('b');
+                    else if ($(value).hasClass('selected-3'))
+                        pattern.steps.push('c');
+                    else
+                        pattern.steps.push('0');
+                });
+            }
+
+            if (pattern.type == "dundun") {
+                pattern.steps_bell = [];
+                row = $(value).find('.bell_row > .pattern_row');
+                $(row).find("td").each(function (index,value) {
+                    if ($(value).hasClass('selected'))
+                        pattern.steps_bell.push('x');
+                    else
+                        pattern.steps_bell.push('0');
+                });
+
+                pattern.steps_drum = [];
+                row = $(value).find('.drum_row > .pattern_row');
+                $(row).find("td").each(function (index,value) {
+                    if ($(value).hasClass('selected-2'))
+                        pattern.steps_drum.push('a');
+                    else if ($(value).hasClass('selected-3'))
+                        pattern.steps_drum.push('b');
+                    else
+                        pattern.steps_drum.push('0');
+                });
+            }
+            json.patterns.push(pattern);
+        });
     }
 
     return Editor;
