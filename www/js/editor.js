@@ -66,20 +66,25 @@ var Editor = (function() {
         });
 
         var drumRow = $('<div></div>');
-        drumRow.addClass("drum_row");
+        drumRow.addClass("drum_row drum_row_1");
         drumRow.append(this.createTable(steps,group));
         pattern.append(drumRow);
+
+        var drumRow2 = $('<div></div>');
+        drumRow2.addClass("drum_row drum_row_2");
+        drumRow2.append(this.createTable(steps,group));
+        pattern.append(drumRow2);
+
         drumRow.find($("td")).click(function() {
-            if ($(this).hasClass("selected-2")) {
-                $(this).removeClass("selected-2");
-                $(this).addClass("selected-3");
-                return;
-            }
-            if ($(this).hasClass("selected-3")) {
-                $(this).removeClass("selected-3");
-                return;
-            }
-            $(this).addClass("selected-2");
+            $(this).toggleClass("selected-2");
+            var index = $(this).parent().find($("td")).index($(this));
+            $(drumRow2.find($("td")).get(index)).removeClass('selected-3');
+        });
+
+        drumRow2.find($("td")).click(function() {
+            $(this).toggleClass("selected-3");
+            var index = $(this).parent().find($("td")).index($(this));
+            $(drumRow.find($("td")).get(index)).removeClass('selected-2');
         });
 
         var closeButton = $('<button><i class="material-icons">close</i></button>');

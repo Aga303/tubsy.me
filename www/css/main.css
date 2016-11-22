@@ -114,3 +114,7 @@ tr.pattern_display + tr.pattern_row {
 .hidden {
     display: none;
 }
+
+.drum_row_2 > .pattern_row {
+    border-top:0px;
+}
