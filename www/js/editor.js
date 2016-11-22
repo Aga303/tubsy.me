@@ -29,13 +29,6 @@ var Editor = (function() {
           _this.markCell(this);
         });
 
-        var patternDisplay = this.createTable(steps,group);
-        patternDisplay.addClass('pattern_display');
-        pattern.prepend(patternDisplay);
-        patternDisplay.click(function() {
-          editorRows.toggleClass("fadeIn hidden");
-        });
-
         var closeButton = $('<button><i class="material-icons">close</i></button>');
         closeButton.addClass('close-btn mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab');
         pattern.prepend(closeButton);
@@ -208,19 +201,12 @@ var Editor = (function() {
     Editor.prototype.markCell = function(cell) {
         var index = $(cell).index();
         var selectedRow = $(cell).parents('.pattern_row');
-        var rows = selectedRow.siblings();
-        var titleRow = $(cell).parents('.pattern_container').find('.pattern_row');
-        var titleRowCell = $(titleRow[0]).find('td:nth-child('+ (index+1) +')');
+        var rows = $(cell).parents('.pattern_row').siblings();
 
         for (var i = 0; i < rows.length; i++)
           $(rows[i]).find('td:nth-child('+ (index+1) +')').removeClass('selected');
 
-        for (var i = 1; i < 4; i++)
-          titleRowCell.removeClass('selected-'+i);
-
         $(cell).toggleClass("selected");
-        if ($(cell).hasClass('selected'))
-          titleRowCell.addClass('selected-'+(selectedRow.index()+1));
     }
 
     Editor.prototype.scrollToElement = function(element) {
