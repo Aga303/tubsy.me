@@ -234,16 +234,20 @@ var Editor = (function() {
             if (pattern.type == "djembe") {
 
                 pattern.steps = [];
-                row = $(value).find('.pattern_display');
-                $(row).find("td").each(function (index,value) {
-                    if ($(value).hasClass('selected-1'))
+                row = $(value).find('.pattern_row');
+                $($(row)[0]).find("td").each(function (index,value) {
+                    if ($(value).hasClass('selected'))
                         pattern.steps.push('a');
-                    else if ($(value).hasClass('selected-2'))
-                        pattern.steps.push('b');
-                    else if ($(value).hasClass('selected-3'))
-                        pattern.steps.push('c');
                     else
                         pattern.steps.push('0');
+                });
+                $($(row)[1]).find("td").each(function (index,value) {
+                    if ($(value).hasClass('selected'))
+                        pattern.steps[index] = 'b';
+                });
+                $($(row)[2]).find("td").each(function (index,value) {
+                    if ($(value).hasClass('selected'))
+                        pattern.steps[index] = 'c';
                 });
             }
 
@@ -258,18 +262,23 @@ var Editor = (function() {
                 });
 
                 pattern.steps_drum = [];
-                row = $(value).find('.drum_row > .pattern_row');
+                row = $(value).find('.drum_row_1 > .pattern_row');
                 $(row).find("td").each(function (index,value) {
                     if ($(value).hasClass('selected-2'))
                         pattern.steps_drum.push('a');
-                    else if ($(value).hasClass('selected-3'))
-                        pattern.steps_drum.push('b');
                     else
                         pattern.steps_drum.push('0');
+                });
+
+                row = $(value).find('.drum_row_2 > .pattern_row');
+                $(row).find("td").each(function (index,value) {
+                    if ($(value).hasClass('selected-3'))
+                        pattern.steps_drum[index] = 'b';
                 });
             }
             json.patterns.push(pattern);
         });
+        return json;
     }
 
     return Editor;
