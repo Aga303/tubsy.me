@@ -1,13 +1,34 @@
 var Editor = (function() {
 
     function Editor() {
+        this.menuContainer = $("#menu_container");
         this.editorContainer = $("#editor_container");
         this.timeSignatureSelectContainer = $("#timesignature_select_container");
         this.addButtonContainer = $("#add_button_container");
 
+        this.createMenu();
         this.addDjembePattern(16,4);
         this.createAddButtons();
 
+    }
+
+    Editor.prototype.createMenu = function() {
+        _this = this;
+        var saveJSONButton = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><i class="material-icons"></i>Save JSON</button>');
+        this.menuContainer.append(saveJSONButton);
+        saveJSONButton.click(function() {
+             var data = _this.exportJSON();
+             var blob = new Blob([data], {type : 'application/json'});
+             var url  = window.URL.createObjectURL(blob);
+
+             var a = document.createElement('a');
+             document.body.appendChild(a);
+             a.download = "rhythm.json";
+             a.href = url;
+             a.click();
+             document.body.removeChild(a);
+             window.URL.revokeObjectURL(objectURL);
+        });
     }
 
     Editor.prototype.addDjembePattern = function(steps, group) {
@@ -166,7 +187,6 @@ var Editor = (function() {
         });
     }
 
-
     Editor.prototype.createDrumPattern = function(drumType) {
         _this = this;
         var timeSelector = document.getElementById("timesignature_selector");
@@ -278,7 +298,7 @@ var Editor = (function() {
             }
             json.patterns.push(pattern);
         });
-        return json;
+        return JSON.stringify(json);
     }
 
     return Editor;
