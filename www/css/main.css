@@ -19,6 +19,14 @@
   float:right;
 }
 
+.top-menu-button {
+  margin-left:10px;
+}
+
+#file-load {
+  display: none;
+}
+
 .mdl-button--fab.mdl-button--mini-fab.close-btn {
     max-height:40px;
     height:5vw;
@@ -79,21 +87,21 @@ tr.pattern_display + tr.pattern_row {
     border-top: 1px solid #999;
 }
 
-.pattern_row:nth-child(1) .selected, .selected-1{
+.editor_rows > .pattern_row:nth-child(1) .selected, .bell_row .selected {
     background-image: url('../img/x.svg');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
 }
 
-.pattern_row:nth-child(2) .selected, .selected-2{
+.editor_rows > .pattern_row:nth-child(2) .selected, .drum_row_1 .selected{
     background-image: url('../img/triangle.svg');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
 }
 
-.pattern_row:nth-child(3) .selected, .selected-3{
+.editor_rows > .pattern_row:nth-child(3) .selected, .drum_row_2 .selected{
     background-image: url('../img/ball.svg');
     background-repeat: no-repeat;
     background-size: contain;

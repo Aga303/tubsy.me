@@ -7,7 +7,7 @@ var Editor = (function() {
         this.addButtonContainer = $("#add_button_container");
 
         this.createMenu();
-        this.addDjembePattern(16,4);
+        this.addDjembePattern("Djembe",16,4);
         this.createAddButtons();
 
     }
@@ -29,9 +29,23 @@ var Editor = (function() {
              document.body.removeChild(a);
              window.URL.revokeObjectURL(objectURL);
         });
+
+        var loadJSONButton = $('<label class="top-menu-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" for="file-load">Load file</label><input type="file" id="file-load" name="files[]" />');
+        this.menuContainer.append(loadJSONButton);
+        loadJSONButton.change(function(evt) {
+            var files = evt.target.files;
+            var f = files[0];
+            var reader = new FileReader();
+            reader.onload = (function(theFile) {
+                return function(e) {
+                    _this.importJSON(JSON.parse(e.target.result));
+                };
+            })(f);
+            reader.readAsText(f);
+        });
     }
 
-    Editor.prototype.addDjembePattern = function(steps, group) {
+    Editor.prototype.addDjembePattern = function(drumName, steps, group,list) {
         var _this = this;
         var pattern = $('<div></div>');
         pattern.addClass('pattern_container animated fadeIn');
@@ -42,9 +56,9 @@ var Editor = (function() {
 
         var editorRows = $('<div></div>');
         editorRows.addClass("editor_rows animated fadeIn");
-        editorRows.append(this.createTable(steps,group));
-        editorRows.append(this.createTable(steps,group));
-        editorRows.append(this.createTable(steps,group));
+        editorRows.append(this.createTable(steps,group,list,'a'));
+        editorRows.append(this.createTable(steps,group,list,'b'));
+        editorRows.append(this.createTable(steps,group,list,'c'));
         pattern.append(editorRows);
         editorRows.find($("td")).click(function() {
           _this.markCell(this);
@@ -63,13 +77,13 @@ var Editor = (function() {
         patternInput.addClass('mdl-textfield__input');
         patternInput.attr('type','text');
         patternInput.attr('id','fname');
-        patternInput.attr('value','Djembe');
+        patternInput.attr('value',drumName);
         patternName.append(patternInput);
         pattern.prepend(patternName);
         this.scrollToElement(pattern[0]);
     }
 
-    Editor.prototype.addDundunPattern = function(drumType, steps, group) {
+    Editor.prototype.addDundunPattern = function(drumName, steps, group,lists) {
         var _this = this;
         var pattern = $('<div></div>');
         pattern.addClass('pattern_container');
@@ -79,7 +93,10 @@ var Editor = (function() {
         this.editorContainer.append(pattern);
 
         var bellRow = $('<div></div>');
-        bellRow.append(this.createTable(steps,group));
+        if (lists != null)
+            bellRow.append(this.createTable(steps,group,lists[0],'x'));
+        else
+            bellRow.append(this.createTable(steps,group,lists,'x'));
         bellRow.addClass('bell_row');
         pattern.append(bellRow);
         bellRow.find($("td")).click(function() {
@@ -88,24 +105,30 @@ var Editor = (function() {
 
         var drumRow = $('<div></div>');
         drumRow.addClass("drum_row drum_row_1");
-        drumRow.append(this.createTable(steps,group));
+        if (lists != null)
+            drumRow.append(this.createTable(steps,group,lists[1],'a'));
+        else
+            drumRow.append(this.createTable(steps,group,lists,'a'));
         pattern.append(drumRow);
 
         var drumRow2 = $('<div></div>');
         drumRow2.addClass("drum_row drum_row_2");
-        drumRow2.append(this.createTable(steps,group));
+        if (lists != null)
+            drumRow2.append(this.createTable(steps,group,lists[1],'b'));
+        else
+            drumRow2.append(this.createTable(steps,group,lists,'b'));
         pattern.append(drumRow2);
 
         drumRow.find($("td")).click(function() {
-            $(this).toggleClass("selected-2");
+            $(this).toggleClass("selected");
             var index = $(this).parent().find($("td")).index($(this));
-            $(drumRow2.find($("td")).get(index)).removeClass('selected-3');
+            $(drumRow2.find($("td")).get(index)).removeClass('selected');
         });
 
         drumRow2.find($("td")).click(function() {
-            $(this).toggleClass("selected-3");
+            $(this).toggleClass("selected");
             var index = $(this).parent().find($("td")).index($(this));
-            $(drumRow.find($("td")).get(index)).removeClass('selected-2');
+            $(drumRow.find($("td")).get(index)).removeClass('selected');
         });
 
         var closeButton = $('<button><i class="material-icons">close</i></button>');
@@ -120,7 +143,7 @@ var Editor = (function() {
         var patternInput = $('<input></input>');
         patternInput.addClass('mdl-textfield__input');
         patternInput.attr('type','text');
-        patternInput.attr('value', drumType);
+        patternInput.attr('value', drumName);
         patternName.append(patternInput);
         pattern.prepend(patternName);
         this.scrollToElement(pattern[0]);
@@ -147,17 +170,21 @@ var Editor = (function() {
       });
     }
 
-    Editor.prototype.createTable = function(cells,group) {
+    Editor.prototype.createTable = function(cells,group,list,char) {
         var table = $('<table class="pattern_row"></table>');
         var tr = $("<tr></tr>");
+        var td;
         var addBg = false;
         for (var i = 0; i < cells; i++) {
             if (i % group == 0)
                 addBg = !addBg;
             if (addBg)
-                tr.append('<td class="gray-background"></td>');
+                td = $('<td class="gray-background"></td>');
             else
-                tr.append('<td></td>');
+                td = $('<td></td>');
+            if (list != null && (list[i]==char))
+                td.addClass('selected');
+            tr.append(td);
         }
         table.append(tr);
         return table;
@@ -203,23 +230,23 @@ var Editor = (function() {
         select34Button.click(function() {
             document.getElementById("timesignature_selector").remove();
             if (drumType == "Djembe")
-                _this.addDjembePattern(12,3);
+                _this.addDjembePattern(drumType,12,3,null);
             else
-                _this.addDundunPattern(drumType,12,3);
+                _this.addDundunPattern(drumType,12,3,null);
         });
         select44Button.click(function() {
             document.getElementById("timesignature_selector").remove();
             if (drumType == "Djembe")
-                _this.addDjembePattern(16,4);
+                _this.addDjembePattern(drumType,16,4,null);
             else
-                _this.addDundunPattern(drumType,16,4);
+                _this.addDundunPattern(drumType,16,4,null);
         });
         select68Button.click(function() {
             document.getElementById("timesignature_selector").remove();
             if (drumType == "Djembe")
-                _this.addDjembePattern(24,6);
+                _this.addDjembePattern(drumType,24,6,null);
             else
-                _this.addDundunPattern(drumType,24,6);
+                _this.addDundunPattern(drumType,24,6,null);
         });
     }
 
@@ -284,7 +311,7 @@ var Editor = (function() {
                 pattern.steps_drum = [];
                 row = $(value).find('.drum_row_1 > .pattern_row');
                 $(row).find("td").each(function (index,value) {
-                    if ($(value).hasClass('selected-2'))
+                    if ($(value).hasClass('selected'))
                         pattern.steps_drum.push('a');
                     else
                         pattern.steps_drum.push('0');
@@ -292,13 +319,26 @@ var Editor = (function() {
 
                 row = $(value).find('.drum_row_2 > .pattern_row');
                 $(row).find("td").each(function (index,value) {
-                    if ($(value).hasClass('selected-3'))
+                    if ($(value).hasClass('selected'))
                         pattern.steps_drum[index] = 'b';
                 });
             }
             json.patterns.push(pattern);
         });
         return JSON.stringify(json);
+    }
+
+    Editor.prototype.importJSON = function(json) {
+        $("#editor_container").find(".pattern_container").remove();
+        for (var i = 0; i < json.patterns.length; i++) {
+            if (json.patterns[i].type == "djembe") {
+                _this.addDjembePattern(json.patterns[i].name, json.patterns[i].length, json.patterns[i].group, json.patterns[i].steps);
+            }
+
+            if (json.patterns[i].type == "dundun") {
+                _this.addDundunPattern(json.patterns[i].name, json.patterns[i].length, json.patterns[i].group, [json.patterns[i].steps_bell, json.patterns[i].steps_drum]);
+            }
+        }
     }
 
     return Editor;
