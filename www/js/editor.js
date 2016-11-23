@@ -14,7 +14,7 @@ var Editor = (function() {
 
     Editor.prototype.createMenu = function() {
         _this = this;
-        var saveJSONButton = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><i class="material-icons"></i>Save JSON</button>');
+        var saveJSONButton = $('<button class="top-menu-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><i class="material-icons"></i>Save file</button>');
         this.menuContainer.append(saveJSONButton);
         saveJSONButton.click(function() {
              var data = _this.exportJSON();
