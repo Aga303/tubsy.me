@@ -126,3 +126,18 @@ tr.pattern_display + tr.pattern_row {
 .drum_row_2 > .pattern_row {
     border-top:0px;
 }
+
+.rhythm-title {
+    padding:0px;
+    margin:0px;
+    width:60%;
+}
+
+.rhythm-title input{
+    font-size: 3vw;
+    border-width: 0;
+}
+
+.rhythm-title {
+    float:left;
+}

@@ -13,7 +13,18 @@ var Editor = (function() {
     }
 
     Editor.prototype.createMenu = function() {
-        _this = this;
+        var _this = this;
+
+        var rhythmName = $('<div></div>');
+        rhythmName.addClass('mdl-textfield mdl-js-textfield rhythm-title');
+        var nameInput = $('<input></input>');
+        nameInput.addClass('mdl-textfield__input');
+        nameInput.attr('type','text');
+        nameInput.attr('id','fname');
+        nameInput.attr('value','My rhythm');
+        rhythmName.append(nameInput);
+        this.menuContainer.append(rhythmName);
+
         var saveJSONButton = $('<button class="top-menu-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><i class="material-icons"></i>Save file</button>');
         this.menuContainer.append(saveJSONButton);
         saveJSONButton.click(function() {
@@ -23,7 +34,7 @@ var Editor = (function() {
 
              var a = document.createElement('a');
              document.body.appendChild(a);
-             a.download = "rhythm.json";
+             a.download = "tubsy_" + $('.rhythm-title > input').val().replace(/ /g, "_") + ".json";
              a.href = url;
              a.click();
              document.body.removeChild(a);
@@ -324,12 +335,15 @@ var Editor = (function() {
                 });
             }
             json.patterns.push(pattern);
+	          json.name = $('.rhythm-title > input').val();
+
         });
         return JSON.stringify(json);
     }
 
     Editor.prototype.importJSON = function(json) {
         $("#editor_container").find(".pattern_container").remove();
+        $('.rhythm-title > input').val(json.name);
         for (var i = 0; i < json.patterns.length; i++) {
             if (json.patterns[i].type == "djembe") {
                 _this.addDjembePattern(json.patterns[i].name, json.patterns[i].length, json.patterns[i].group, json.patterns[i].steps);
