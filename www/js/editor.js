@@ -36,9 +36,11 @@ var Editor = (function() {
              document.body.appendChild(a);
              a.download = "tubsy_" + $('.rhythm-title > input').val().replace(/ /g, "_") + ".json";
              a.href = url;
-             a.click();
+             a.click(function() {
+                  window.URL.revokeObjectURL(url);
+             });
              document.body.removeChild(a);
-             window.URL.revokeObjectURL(objectURL);
+            //  window.URL.revokeObjectURL(url);
         });
 
         var loadJSONButton = $('<label class="top-menu-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" for="file-load">Load file</label><input type="file" id="file-load" name="files[]" />');
