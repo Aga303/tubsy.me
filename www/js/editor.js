@@ -182,7 +182,7 @@ var Editor = (function() {
       });
     }
 
-    Editor.prototype.createTable = function(cells,group,list,char) {
+    Editor.prototype.createTable = function(cells,group,list,soundtype) {
         var table = $('<table class="pattern_row"></table>');
         var tr = $("<tr></tr>");
         var td;
@@ -194,7 +194,7 @@ var Editor = (function() {
                 td = $('<td class="gray-background"></td>');
             else
                 td = $('<td></td>');
-            if (list != null && (list[i]==char))
+            if (list != null && (list[i]==soundtype))
                 td.addClass('selected');
             tr.append(td);
         }
