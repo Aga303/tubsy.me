@@ -40,7 +40,6 @@ var Editor = (function() {
                   window.URL.revokeObjectURL(url);
              });
              document.body.removeChild(a);
-            //  window.URL.revokeObjectURL(url);
         });
 
         var loadJSONButton = $('<label class="top-menu-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" for="file-load">Load file</label><input type="file" id="file-load" name="files[]" />');
