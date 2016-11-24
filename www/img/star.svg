@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -54,19 +54,19 @@
      id="layer1">
     <path
        sodipodi:type="star"
-       style="fill:#2c89a0;stroke:none"
+       style="fill:#803300;stroke:none"
        id="path3415"
-       sodipodi:sides="6"
-       sodipodi:cx="49.870397"
-       sodipodi:cy="48.840029"
+       sodipodi:sides="5"
+       sodipodi:cx="49.870396"
+       sodipodi:cy="48.840031"
        sodipodi:r1="37.070492"
        sodipodi:r2="18.53525"
        sodipodi:arg1="0.89605538"
-       sodipodi:arg2="1.4196542"
+       sodipodi:arg2="1.5243739"
        inkscape:flatsided="false"
        inkscape:rounded="0"
        inkscape:randomized="0"
-       d="M 73.028148,77.787221 52.661199,67.163974 36.38027,83.368828 35.396797,60.418909 13.222517,54.421638 32.605994,42.094965 26.712643,19.89284 l 20.366949,10.623247 16.28093,-16.204854 0.983472,22.94992 22.174281,5.997271 -19.383477,12.326672 z"
+       d="M 73.028148,77.787221 50.730538,67.355312 29.49612,79.809536 32.527115,55.379611 14.120648,39.033047 38.291517,34.366432 48.150112,11.809476 60.057535,33.355275 84.556949,35.760873 67.745273,53.743523 Z"
        inkscape:transform-center-x="0.53159676"
        inkscape:transform-center-y="-3.0305248" />
   </g>
