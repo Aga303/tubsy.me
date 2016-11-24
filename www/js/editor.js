@@ -68,9 +68,9 @@ var Editor = (function() {
 
         var editorRows = $('<div></div>');
         editorRows.addClass("editor_rows animated fadeIn");
-        editorRows.append(this.createTable(steps,group,list,'a'));
-        editorRows.append(this.createTable(steps,group,list,'b'));
-        editorRows.append(this.createTable(steps,group,list,'c'));
+        editorRows.append(this.createTable(steps,group,list,'slap'));
+        editorRows.append(this.createTable(steps,group,list,'tone'));
+        editorRows.append(this.createTable(steps,group,list,'bass'));
         pattern.append(editorRows);
         editorRows.find($("td")).click(function() {
           _this.markCell(this);
@@ -118,17 +118,17 @@ var Editor = (function() {
         var drumRow = $('<div></div>');
         drumRow.addClass("drum_row drum_row_1");
         if (lists != null)
-            drumRow.append(this.createTable(steps,group,lists[1],'a'));
+            drumRow.append(this.createTable(steps,group,lists[1],'closed'));
         else
-            drumRow.append(this.createTable(steps,group,lists,'a'));
+            drumRow.append(this.createTable(steps,group,lists,'closed'));
         pattern.append(drumRow);
 
         var drumRow2 = $('<div></div>');
         drumRow2.addClass("drum_row drum_row_2");
         if (lists != null)
-            drumRow2.append(this.createTable(steps,group,lists[1],'b'));
+            drumRow2.append(this.createTable(steps,group,lists[1],'open'));
         else
-            drumRow2.append(this.createTable(steps,group,lists,'b'));
+            drumRow2.append(this.createTable(steps,group,lists,'open'));
         pattern.append(drumRow2);
 
         drumRow.find($("td")).click(function() {
@@ -296,17 +296,17 @@ var Editor = (function() {
                 row = $(value).find('.pattern_row');
                 $($(row)[0]).find("td").each(function (index,value) {
                     if ($(value).hasClass('selected'))
-                        pattern.steps.push('a');
+                        pattern.steps.push('slap');
                     else
                         pattern.steps.push('0');
                 });
                 $($(row)[1]).find("td").each(function (index,value) {
                     if ($(value).hasClass('selected'))
-                        pattern.steps[index] = 'b';
+                        pattern.steps[index] = 'tone';
                 });
                 $($(row)[2]).find("td").each(function (index,value) {
                     if ($(value).hasClass('selected'))
-                        pattern.steps[index] = 'c';
+                        pattern.steps[index] = 'bass';
                 });
             }
 
@@ -324,7 +324,7 @@ var Editor = (function() {
                 row = $(value).find('.drum_row_1 > .pattern_row');
                 $(row).find("td").each(function (index,value) {
                     if ($(value).hasClass('selected'))
-                        pattern.steps_drum.push('a');
+                        pattern.steps_drum.push('closed');
                     else
                         pattern.steps_drum.push('0');
                 });
@@ -332,7 +332,7 @@ var Editor = (function() {
                 row = $(value).find('.drum_row_2 > .pattern_row');
                 $(row).find("td").each(function (index,value) {
                     if ($(value).hasClass('selected'))
-                        pattern.steps_drum[index] = 'b';
+                        pattern.steps_drum[index] = 'open';
                 });
             }
             json.patterns.push(pattern);
