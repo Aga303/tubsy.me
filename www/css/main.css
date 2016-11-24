@@ -87,25 +87,26 @@ tr.pattern_display + tr.pattern_row {
     border-top: 1px solid #999;
 }
 
-.editor_rows > .pattern_row:nth-child(1) .selected, .bell_row .selected {
+.pattern_row .selected {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.bell_row .selected {
     background-image: url('../img/x.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
 }
 
-.editor_rows > .pattern_row:nth-child(2) .selected, .drum_row_1 .selected{
+.editor_rows > .pattern_row:nth-child(1) .selected, .drum_row_1 .selected{
     background-image: url('../img/triangle.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
 }
 
-.editor_rows > .pattern_row:nth-child(3) .selected, .drum_row_2 .selected{
+.editor_rows > .pattern_row:nth-child(2) .selected, .drum_row_2 .selected{
     background-image: url('../img/ball.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
+}
+
+.editor_rows > .pattern_row:nth-child(3) .selected{
+    background-image: url('../img/star.svg');
 }
 
 .pattern_container > table tr {
