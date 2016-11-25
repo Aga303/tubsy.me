@@ -292,47 +292,49 @@ var Editor = (function() {
 
             if (pattern.type == "djembe") {
 
-                pattern.steps = [];
+                pattern.steps = {};
+                pattern.steps.drum = [];
                 row = $(value).find('.pattern_row');
                 $($(row)[0]).find("td").each(function (index,value) {
                     if ($(value).hasClass('selected'))
-                        pattern.steps.push('slap');
+                        pattern.steps.drum.push('slap');
                     else
-                        pattern.steps.push('0');
+                        pattern.steps.drum.push('0');
                 });
                 $($(row)[1]).find("td").each(function (index,value) {
                     if ($(value).hasClass('selected'))
-                        pattern.steps[index] = 'tone';
+                        pattern.steps.drum[index] = 'tone';
                 });
                 $($(row)[2]).find("td").each(function (index,value) {
                     if ($(value).hasClass('selected'))
-                        pattern.steps[index] = 'bass';
+                        pattern.steps.drum[index] = 'bass';
                 });
             }
 
             if (pattern.type == "dundun") {
-                pattern.steps_bell = [];
+                pattern.steps = {};
+                pattern.steps.bell = [];
                 row = $(value).find('.bell_row > .pattern_row');
                 $(row).find("td").each(function (index,value) {
                     if ($(value).hasClass('selected'))
-                        pattern.steps_bell.push('x');
+                        pattern.steps.bell.push('x');
                     else
-                        pattern.steps_bell.push('0');
+                        pattern.steps.bell.push('0');
                 });
 
-                pattern.steps_drum = [];
+                pattern.steps.drum = [];
                 row = $(value).find('.drum_row_1 > .pattern_row');
                 $(row).find("td").each(function (index,value) {
                     if ($(value).hasClass('selected'))
-                        pattern.steps_drum.push('closed');
+                        pattern.steps.drum.push('closed');
                     else
-                        pattern.steps_drum.push('0');
+                        pattern.steps.drum.push('0');
                 });
 
                 row = $(value).find('.drum_row_2 > .pattern_row');
                 $(row).find("td").each(function (index,value) {
                     if ($(value).hasClass('selected'))
-                        pattern.steps_drum[index] = 'open';
+                        pattern.steps.drum[index] = 'open';
                 });
             }
             json.patterns.push(pattern);
@@ -347,11 +349,11 @@ var Editor = (function() {
         $('.rhythm-title > input').val(json.name);
         for (var i = 0; i < json.patterns.length; i++) {
             if (json.patterns[i].type == "djembe") {
-                _this.addDjembePattern(json.patterns[i].name, json.patterns[i].length, json.patterns[i].group, json.patterns[i].steps);
+                _this.addDjembePattern(json.patterns[i].name, json.patterns[i].length, json.patterns[i].group, json.patterns[i].steps.drum);
             }
 
             if (json.patterns[i].type == "dundun") {
-                _this.addDundunPattern(json.patterns[i].name, json.patterns[i].length, json.patterns[i].group, [json.patterns[i].steps_bell, json.patterns[i].steps_drum]);
+                _this.addDundunPattern(json.patterns[i].name, json.patterns[i].length, json.patterns[i].group, [json.patterns[i].steps.bell, json.patterns[i].steps.drum]);
             }
         }
     }
