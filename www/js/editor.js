@@ -34,7 +34,7 @@ var Editor = (function() {
 
              var a = document.createElement('a');
              document.body.appendChild(a);
-             a.download = "tubsy_" + $('.rhythm-title > input').val().replace(/ /g, "_") + ".json";
+             a.download = $('.rhythm-title > input').val().replace(/ /g, "_") + ".tubsy";
              a.href = url;
              a.click(function() {
                   window.URL.revokeObjectURL(url);
