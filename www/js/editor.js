@@ -236,9 +236,11 @@ var Editor = (function() {
         var select34Button = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">3/4</button>');
         var select44Button = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">4/4</button>');
         var select68Button = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">6/8</button>');
+        var select128Button = $('<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">12/8</button>');
         timeSignatureSelectButtons.append(select34Button);
         timeSignatureSelectButtons.append(select44Button);
         timeSignatureSelectButtons.append(select68Button);
+        timeSignatureSelectButtons.append(select128Button);
         select34Button.click(function() {
             document.getElementById("timesignature_selector").remove();
             if (drumType == "Djembe")
@@ -259,6 +261,13 @@ var Editor = (function() {
                 _this.addDjembePattern(drumType,24,6,null);
             else
                 _this.addDundunPattern(drumType,24,6,null);
+        });
+        select128Button.click(function() {
+            document.getElementById("timesignature_selector").remove();
+            if (drumType == "Djembe")
+                _this.addDjembePattern(drumType,48,6,null);
+            else
+                _this.addDundunPattern(drumType,48,6,null);
         });
     }
 
