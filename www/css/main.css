@@ -128,15 +128,32 @@ tr.pattern_display + tr.pattern_row {
     border-top:0px;
 }
 
+.mdl-layout__header {
+    min-height:32px;
+    height:48px;
+}
+.mdl-layout__header-row {
+    height:48px;
+}
+
+.mdl-layout__header .mdl-layout__drawer-button, .mdl-layout__drawer-button {
+    margin:0;
+}
+
 .rhythm-title {
     padding:0px;
     margin:0px;
-    width:60%;
+    width:90%;
+    height: 48px;
 }
 
 .rhythm-title input{
-    font-size: 3vw;
+    font-size: 1.4em;
     border-width: 0;
+    padding:0;
+    padding-top:6px;
+    height: 42px;
+    vertical-align: bottom;
 }
 
 .rhythm-title {

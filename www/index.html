@@ -17,20 +17,31 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     </head>
     <body>
-		<div class="mdl-grid">
-            <div id="menu_container" class="mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone"></div>
-			<div id="editor_container" class="mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone"></div>
-			<div id="timesignature_select_container" class="mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone"></div>
-			<div id="add_button_container" class="mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone"></div>
-		</div>
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <header class="mdl-layout__header mdl-layout__header--scroll">
+                <div class="mdl-layout__header-row mdl-cell--12-col-desktop mdl-cell--0-offset-desktop"></div>
+            </header>
+            <div class="mdl-layout__drawer" id="drawer-menu">
+                <button id="close-main-menu" class="top-menu-button mdl-button mdl-js-button mdl-js-ripple-effect"><span style="font-size:1.4em">&#171;</span> close menu</button>
+                <nav class="mdl-navigation main-menu"></nav>
+            </div>
+            <main class="mdl-layout__content">
+                <div class="mdl-grid">
+                    <div id="menu_container" class="mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone"></div>
+                    <div id="editor_container" class="mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone"></div>
+                    <div id="timesignature_select_container" class="mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone"></div>
+                    <div id="add_button_container" class="mdl-cell mdl-cell--10-col-desktop mdl-cell--1-offset-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone"></div>
+                </div>
+            </main>
+        </div>
         <script defer src="https://code.getmdl.io/1.2.0/material.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="js/vendor/mdl-jquery-modal-dialog.js"></script>
         <script src="js/editor.js"></script>
-		<script>
-			$(function() {
-    			var editor = new Editor();
-			});
-		</script>
+    		<script>
+    			  $(function() {
+        			   var editor = new Editor();
+    			  });
+    		</script>
     </body>
 </html>

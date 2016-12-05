@@ -14,19 +14,23 @@ var Editor = (function() {
 
     Editor.prototype.createMenu = function() {
         var _this = this;
+        
+        document.getElementById("close-main-menu").onclick = function() {
+            $( '.mdl-layout__drawer, .mdl-layout__obfuscator' ).removeClass( 'is-visible' );
+        };
 
         var rhythmName = $('<div></div>');
         rhythmName.addClass('mdl-textfield mdl-js-textfield rhythm-title');
         var nameInput = $('<input></input>');
-        nameInput.addClass('mdl-textfield__input');
+        nameInput.addClass('mdl-textfield__input ');
         nameInput.attr('type','text');
         nameInput.attr('id','fname');
         nameInput.attr('value','My rhythm');
         rhythmName.append(nameInput);
-        this.menuContainer.append(rhythmName);
+        $(".mdl-layout__header-row").append(rhythmName);
 
-        var saveJSONButton = $('<button class="top-menu-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"><i class="material-icons"></i>Save file</button>');
-        this.menuContainer.append(saveJSONButton);
+        var saveJSONButton = $('<button class="top-menu-button mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons"></i>Save file</button>');
+        $(".main-menu").append(saveJSONButton);
         saveJSONButton.click(function() {
              var data = _this.exportJSON();
              var blob = new Blob([data], {type : 'application/json'});
@@ -42,8 +46,8 @@ var Editor = (function() {
              document.body.removeChild(a);
         });
 
-        var loadJSONButton = $('<label class="top-menu-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" for="file-load">Load file</label><input type="file" id="file-load" name="files[]" />');
-        this.menuContainer.append(loadJSONButton);
+        var loadJSONButton = $('<label class="top-menu-button mdl-button mdl-js-button mdl-js-ripple-effect" for="file-load">Load file</label><input type="file" id="file-load" name="files[]" />');
+        $(".main-menu").append(loadJSONButton);
         loadJSONButton.change(function(evt) {
             var files = evt.target.files;
             var f = files[0];
