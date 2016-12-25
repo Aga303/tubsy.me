@@ -341,6 +341,7 @@ var Editor = (function() {
         var patterns = $("#editor_container").find(".pattern_container");
         var pattern;
         var row;
+        json.name = $('.rhythm-title > input').val();
         patterns.each(function (index, value) {
             pattern = {};
 
@@ -397,8 +398,6 @@ var Editor = (function() {
                 });
             }
             json.patterns.push(pattern);
-	          json.name = $('.rhythm-title > input').val();
-
         });
         return JSON.stringify(json);
     }
