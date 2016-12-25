@@ -159,13 +159,6 @@ var Editor = (function() {
             $(drumRow.find($("td")).get(index)).removeClass('selected');
         });
 
-        // var closeButton = $('<button><i class="material-icons">close</i></button>');
-        // closeButton.addClass('close-btn mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab');
-        // pattern.prepend(closeButton);
-        // closeButton.click(function() {
-        //     _this.showRemovePatternDialog(this);
-        // });
-
         var closeMenu = $('<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" data-mdl-for="menu'+timeStamp+'"></ul>');
         closeMenu.addClass('mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect');
 
