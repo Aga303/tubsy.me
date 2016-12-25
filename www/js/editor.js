@@ -14,7 +14,7 @@ var Editor = (function() {
 
     Editor.prototype.createMenu = function() {
         var _this = this;
-        
+
         document.getElementById("close-main-menu").onclick = function() {
             $( '.mdl-layout__drawer, .mdl-layout__obfuscator' ).removeClass( 'is-visible' );
         };
@@ -62,6 +62,7 @@ var Editor = (function() {
     }
 
     Editor.prototype.addDjembePattern = function(drumName, steps, group,list) {
+        var timeStamp = new Date().getTime();
         var _this = this;
         var pattern = $('<div></div>');
         pattern.addClass('pattern_container animated fadeIn');
@@ -80,9 +81,18 @@ var Editor = (function() {
           _this.markCell(this);
         });
 
-        var closeButton = $('<button><i class="material-icons">close</i></button>');
-        closeButton.addClass('close-btn mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab');
-        pattern.prepend(closeButton);
+        var closeMenu = $('<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" data-mdl-for="menu'+timeStamp+'"></ul>');
+        closeMenu.addClass('mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect');
+
+        var closeButton = $('<li class="mdl-menu__item">remove pattern</li>');
+        closeMenu.append(closeButton);
+
+        pattern.append(closeMenu);
+
+        var menuButton = $('<button id="menu'+timeStamp+'"><i class="material-icons">more_vert</i></button>');
+        menuButton.addClass('close-btn mdl-button mdl-js-button mdl-button--icon mdl-button--fab mdl-button--mini-fab');
+
+        pattern.prepend(menuButton);
         closeButton.click(function() {
             _this.showRemovePatternDialog(this);
         });
@@ -96,10 +106,12 @@ var Editor = (function() {
         patternInput.attr('value',drumName);
         patternName.append(patternInput);
         pattern.prepend(patternName);
+        componentHandler.upgradeAllRegistered();
         this.scrollToElement(pattern[0]);
     }
 
     Editor.prototype.addDundunPattern = function(drumName, steps, group,lists) {
+        var timeStamp = new Date().getTime();
         var _this = this;
         var pattern = $('<div></div>');
         pattern.addClass('pattern_container');
@@ -147,9 +159,25 @@ var Editor = (function() {
             $(drumRow.find($("td")).get(index)).removeClass('selected');
         });
 
-        var closeButton = $('<button><i class="material-icons">close</i></button>');
-        closeButton.addClass('close-btn mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab');
-        pattern.prepend(closeButton);
+        // var closeButton = $('<button><i class="material-icons">close</i></button>');
+        // closeButton.addClass('close-btn mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab');
+        // pattern.prepend(closeButton);
+        // closeButton.click(function() {
+        //     _this.showRemovePatternDialog(this);
+        // });
+
+        var closeMenu = $('<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" data-mdl-for="menu'+timeStamp+'"></ul>');
+        closeMenu.addClass('mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect');
+
+        var closeButton = $('<li class="mdl-menu__item">remove pattern</li>');
+        closeMenu.append(closeButton);
+
+        pattern.append(closeMenu);
+
+        var menuButton = $('<button id="menu'+timeStamp+'"><i class="material-icons">more_vert</i></button>');
+        menuButton.addClass('close-btn mdl-button mdl-js-button mdl-button--icon mdl-button--fab mdl-button--mini-fab');
+
+        pattern.prepend(menuButton);
         closeButton.click(function() {
             _this.showRemovePatternDialog(this);
         });
@@ -162,6 +190,7 @@ var Editor = (function() {
         patternInput.attr('value', drumName);
         patternName.append(patternInput);
         pattern.prepend(patternName);
+        componentHandler.upgradeAllRegistered();
         this.scrollToElement(pattern[0]);
     }
 
@@ -171,7 +200,7 @@ var Editor = (function() {
 
     Editor.prototype.showRemovePatternDialog = function(closeButton) {
       var _this = this;
-      var patternName = $(closeButton).siblings(".pattern-title").find("input").val();
+      var patternName = $(closeButton).parent().parent().siblings(".pattern-title").find("input").val();
       showDialog({
           title: 'Remove pattern ' + patternName + '?',
           positive: {
