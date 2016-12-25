@@ -9,7 +9,9 @@ var Editor = (function() {
         this.createMenu();
         this.addDjembePattern("Djembe",16,4);
         this.createAddButtons();
-
+        if (localStorage.tubsyme)
+            this.importJSON(JSON.parse(localStorage.tubsyme));
+        setInterval(this.saveToLocalStorage, 10000);
     }
 
     Editor.prototype.createMenu = function() {
@@ -83,6 +85,13 @@ var Editor = (function() {
                 title: 'No'
             }
         });
+    }
+
+    Editor.prototype.saveToLocalStorage = function() {
+        if (typeof(Storage) !== "undefined") {
+            var data = _this.exportJSON();
+            localStorage.setItem("tubsyme", data);
+        }
     }
 
     Editor.prototype.addDjembePattern = function(drumName, steps, group,list) {
