@@ -29,6 +29,12 @@ var Editor = (function() {
         rhythmName.append(nameInput);
         $(".mdl-layout__header-row").append(rhythmName);
 
+        var newRhythmButton = $('<button class="top-menu-button mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons"></i>New Rhythm</button>');
+        $(".main-menu").append(newRhythmButton);
+        newRhythmButton.click(function() {
+            _this.clearRhythm();
+        });
+
         var saveJSONButton = $('<button class="top-menu-button mdl-button mdl-js-button mdl-js-ripple-effect"><i class="material-icons"></i>Save file</button>');
         $(".main-menu").append(saveJSONButton);
         saveJSONButton.click(function() {
@@ -58,6 +64,24 @@ var Editor = (function() {
                 };
             })(f);
             reader.readAsText(f);
+        });
+    }
+
+    Editor.prototype.clearRhythm = function() {
+        var _this = this;
+        showDialog({
+            title: 'Remove all patterns?',
+            positive: {
+                title: 'Yes, remove!',
+                onClick: function (e) {
+                    $('.pattern_container').remove();
+                    $('.rhythm-title > input').val('My rhythm');
+                    $('.mdl-layout__drawer, .mdl-layout__obfuscator').removeClass( 'is-visible' );
+                }
+            },
+            negative: {
+                title: 'No'
+            }
         });
     }
 
