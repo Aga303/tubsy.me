@@ -162,41 +162,41 @@ var Editor = (function() {
 
         var bellRow = $('<div></div>');
         if (lists != null)
-            bellRow.append(this.createTable(steps,group,lists[0],'x'));
+            bellRow.append(this.createTable(steps,group,lists[0],'bell'));
         else
-            bellRow.append(this.createTable(steps,group,lists,'x'));
+            bellRow.append(this.createTable(steps,group,lists,'bell'));
         bellRow.addClass('bell_row');
         pattern.append(bellRow);
         bellRow.find($("td")).click(function() {
             $(this).toggleClass("selected");
         });
 
-        var drumRow = $('<div></div>');
-        drumRow.addClass("drum_row drum_row_1");
+        var closedRow = $('<div></div>');
+        closedRow.addClass("drum_row closed_row");
         if (lists != null)
-            drumRow.append(this.createTable(steps,group,lists[1],'closed'));
+            closedRow.append(this.createTable(steps,group,lists[1],'closed'));
         else
-            drumRow.append(this.createTable(steps,group,lists,'closed'));
-        pattern.append(drumRow);
+            closedRow.append(this.createTable(steps,group,lists,'closed'));
+        pattern.append(closedRow);
 
-        var drumRow2 = $('<div></div>');
-        drumRow2.addClass("drum_row drum_row_2");
+        var openRow = $('<div></div>');
+        openRow.addClass("drum_row open_row");
         if (lists != null)
-            drumRow2.append(this.createTable(steps,group,lists[2],'open'));
+            openRow.append(this.createTable(steps,group,lists[2],'open'));
         else
-            drumRow2.append(this.createTable(steps,group,lists,'open'));
-        pattern.append(drumRow2);
+            openRow.append(this.createTable(steps,group,lists,'open'));
+        pattern.append(openRow);
 
-        drumRow.find($("td")).click(function() {
+        closedRow.find($("td")).click(function() {
             $(this).toggleClass("selected");
             var index = $(this).parent().find($("td")).index($(this));
-            $(drumRow2.find($("td")).get(index)).removeClass('selected');
+            $(openRow.find($("td")).get(index)).removeClass('selected');
         });
 
-        drumRow2.find($("td")).click(function() {
+        openRow.find($("td")).click(function() {
             $(this).toggleClass("selected");
             var index = $(this).parent().find($("td")).index($(this));
-            $(drumRow.find($("td")).get(index)).removeClass('selected');
+            $(closedRow.find($("td")).get(index)).removeClass('selected');
         });
 
         var closeMenu = $('<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" data-mdl-for="menu'+timeStamp+'"></ul>');
@@ -365,61 +365,65 @@ var Editor = (function() {
             pattern.group = $(value).data('group');
             pattern.length = $(value).data('steps');
             pattern.type = $(value).data('type');
+            pattern.rows = {};
 
             if (pattern.type == "djembe") {
-
-                pattern.steps = {};
-                pattern.steps.drum_1 = [];
-                pattern.steps.drum_2 = [];
-                pattern.steps.drum_3 = [];
+                pattern.rows.slap = {};
+                pattern.rows.tone = {};
+                pattern.rows.bass = {};
+                pattern.rows.slap.steps = [];
+                pattern.rows.tone.steps = [];
+                pattern.rows.bass.steps = [];
                 row = $(value).find('.pattern_row');
                 $($(row)[0]).find("td").each(function (index,value) {
                     if ($(value).hasClass('selected'))
-                        pattern.steps.drum_1.push('slap');
+                        pattern.rows.slap.steps.push('slap');
                     else
-                        pattern.steps.drum_1.push('0');
+                        pattern.rows.slap.steps.push('-');
                 });
                 $($(row)[1]).find("td").each(function (index,value) {
                     if ($(value).hasClass('selected'))
-                        pattern.steps.drum_2.push('tone');
+                        pattern.rows.tone.steps.push('tone');
                     else
-                        pattern.steps.drum_2.push('0');
+                        pattern.rows.tone.steps.push('-');
                 });
                 $($(row)[2]).find("td").each(function (index,value) {
                     if ($(value).hasClass('selected'))
-                        pattern.steps.drum_3.push('bass');
+                        pattern.rows.bass.steps.push('bass');
                     else
-                        pattern.steps.drum_3.push('0');
+                        pattern.rows.bass.steps.push('-');
                 });
             }
 
             if (pattern.type == "dundun") {
-                pattern.steps = {};
-                pattern.steps.bell = [];
+                pattern.rows.bell = {};
+                pattern.rows.bell.steps = [];
                 row = $(value).find('.bell_row > .pattern_row');
                 $(row).find("td").each(function (index,value) {
                     if ($(value).hasClass('selected'))
-                        pattern.steps.bell.push('x');
+                        pattern.rows.bell.steps.push('bell');
                     else
-                        pattern.steps.bell.push('0');
+                        pattern.rows.bell.steps.push('-');
                 });
 
-                pattern.steps.drum_1 = [];
-                pattern.steps.drum_2 = [];
-                row = $(value).find('.drum_row_1 > .pattern_row');
+                pattern.rows.closed = {};
+                pattern.rows.closed.steps = [];
+                pattern.rows.open = {};
+                pattern.rows.open.steps = [];
+                row = $(value).find('.closed_row > .pattern_row');
                 $(row).find("td").each(function (index,value) {
                     if ($(value).hasClass('selected'))
-                        pattern.steps.drum_1.push('closed');
+                        pattern.rows.closed.steps.push('closed');
                     else
-                        pattern.steps.drum_1.push('0');
+                        pattern.rows.closed.steps.push('-');
                 });
 
-                row = $(value).find('.drum_row_2 > .pattern_row');
+                row = $(value).find('.open_row > .pattern_row');
                 $(row).find("td").each(function (index,value) {
                     if ($(value).hasClass('selected'))
-                        pattern.steps.drum_2.push('open');
+                        pattern.rows.open.steps.push('open');
                     else
-                        pattern.steps.drum_2.push('0');
+                        pattern.rows.open.steps.push('-');
                 });
             }
             json.patterns.push(pattern);
@@ -432,11 +436,11 @@ var Editor = (function() {
         $('.rhythm-title > input').val(json.name);
         for (var i = 0; i < json.patterns.length; i++) {
             if (json.patterns[i].type == "djembe") {
-                _this.addDjembePattern(json.patterns[i].name, json.patterns[i].length, json.patterns[i].group, [json.patterns[i].steps.drum_1, json.patterns[i].steps.drum_2, json.patterns[i].steps.drum_3]);
+                _this.addDjembePattern(json.patterns[i].name, json.patterns[i].length, json.patterns[i].group, [json.patterns[i].rows.slap.steps, json.patterns[i].rows.tone.steps, json.patterns[i].rows.bass.steps]);
             }
 
             if (json.patterns[i].type == "dundun") {
-                _this.addDundunPattern(json.patterns[i].name, json.patterns[i].length, json.patterns[i].group, [json.patterns[i].steps.bell, json.patterns[i].steps.drum_1, json.patterns[i].steps.drum_2]);
+                _this.addDundunPattern(json.patterns[i].name, json.patterns[i].length, json.patterns[i].group, [json.patterns[i].rows.bell.steps, json.patterns[i].rows.closed.steps, json.patterns[i].rows.open.steps]);
             }
         }
     }

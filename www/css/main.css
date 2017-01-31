@@ -97,11 +97,11 @@ tr.pattern_display + tr.pattern_row {
     background-image: url('../img/x.svg');
 }
 
-.editor_rows > .pattern_row:nth-child(1) .selected, .drum_row_1 .selected{
+.editor_rows > .pattern_row:nth-child(1) .selected, .closed_row .selected{
     background-image: url('../img/triangle.svg');
 }
 
-.editor_rows > .pattern_row:nth-child(2) .selected, .drum_row_2 .selected{
+.editor_rows > .pattern_row:nth-child(2) .selected, .open_row .selected{
     background-image: url('../img/ball.svg');
 }
 
@@ -124,7 +124,7 @@ tr.pattern_display + tr.pattern_row {
     display: none;
 }
 
-.drum_row_2 > .pattern_row {
+.open_row > .pattern_row {
     border-top:0px;
 }
 
