@@ -1,0 +1,9 @@
+{
+  "name": "tubsy",
+  "version": "0.0.1",
+  "devDependencies": {
+    "del": "^2.2.2",
+    "grunt": "^0.4.5",
+    "grunt-ts": "^3.0.0"
+  }
+}

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+curdir=$(pwd -P)
+
+docker run -it --rm --user=$(id -u):$(id -g) -v ${curdir}/tubsy:/tmp/tubsy/app tubsy-buildenv
