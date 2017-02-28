@@ -1,6 +1,6 @@
 FROM node
-EXPOSE 3000
+EXPOSE 8080
 
-RUN npm install -g hello-world-server
+RUN npm install -g http-server
 
-ENTRYPOINT hello-world-server
+ENTRYPOINT http-server /home/node/src/
