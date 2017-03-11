@@ -1,0 +1,10 @@
+{
+  "name": "tubsy",
+  "version": "0.0.1",
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^3.1.5",
+    "typescript": "^2.2.1"
+  }
+}
