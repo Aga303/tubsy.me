@@ -2,4 +2,4 @@
 
 curdir=$(pwd -P)
 
-docker run --rm -v ${curdir}/src:/gulp/src -v ${curdir}/dist:/gulp/dist tubsy-buildenv
+docker run -it --rm --user=$(id -u):$(id -g) -v ${curdir}/tubsy:/tmp/tubsy tubsy-buildenv

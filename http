@@ -1,3 +1,8 @@
 #!/bin/bash
 
-docker run -v $(pwd)/dist:/usr/share/nginx/html:ro --detach --publish=8080:80 --name=tubsy-http nginx
+running_container="$(docker ps -q --filter="name=tubsy-http")"
+if [ ! -z "${running_container}" ]; then
+    docker rm -f "${running_container}"
+fi
+
+docker run -v $(pwd)/tubsy/dist:/usr/share/nginx/html:ro --detach --publish=8080:80 --name=tubsy-http nginx
